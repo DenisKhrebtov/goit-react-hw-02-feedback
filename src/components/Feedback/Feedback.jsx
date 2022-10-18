@@ -7,8 +7,6 @@ export default class Feedback extends React.Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    percentage: 0,
   };
 
   handlePositive = () => {
@@ -33,7 +31,11 @@ export default class Feedback extends React.Component {
     });
   };
 
+  // countPositiveFeedbackPercentage = () => {};
+
   render() {
+    const totalFeedback = this.state.length;
+    console.log(totalFeedback);
     return (
       <Wrapper>
         <Title>Please leave feedback </Title>
