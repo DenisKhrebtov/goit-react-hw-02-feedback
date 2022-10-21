@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Wrapper, Title, ButtonContainer } from './App.styled';
+import { Wrapper } from './App.styled';
 import { Statistics } from '../Statistics/Statistics';
 import { Notification } from '../Notification/Notification';
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
+import { Section } from '../Section/Section';
 
 export class App extends Component {
   state = {
@@ -11,7 +12,8 @@ export class App extends Component {
     bad: 0,
   };
 
-  onSetVoice = type => {
+  onSetVoice = e => {
+    const type = e.target.name;
     this.setState(prevState => ({ [type]: prevState[type] + 1 }));
   };
 
@@ -24,30 +26,31 @@ export class App extends Component {
   };
 
   render() {
-    const keyOptions = Object.keys(this.state);
     const total = this.countTotalFeedback();
+    const keyOptions = Object.keys(this.state);
+    const { good, neutral, bad } = this.state;
     const positive = this.countPositiveFeedbackPercentage();
     return (
       <Wrapper>
-        <Title>
+        <Section title="Please leave feedback">
           <FeedbackOptions
             options={keyOptions}
             onLeaveFeedback={this.onSetVoice}
           />
-        </Title>
-        <Title title="Statistics">
+        </Section>
+        <Section title="Statistics">
           {total > 0 ? (
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={total}
               positive={positive}
             />
           ) : (
             <Notification message="There is no feedback" />
           )}
-        </Title>
+        </Section>
       </Wrapper>
     );
   }

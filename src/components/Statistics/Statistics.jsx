@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { SpanContainer } from './Statistics.module';
 export const Statistics = ({ good, neutral, bad, total, positive }) => (
   <ul>
@@ -9,3 +10,11 @@ export const Statistics = ({ good, neutral, bad, total, positive }) => (
     <li>Positive Feedback:{positive}%</li>
   </ul>
 );
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positive: PropTypes.number.isRequired,
+};
